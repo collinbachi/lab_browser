@@ -38,11 +38,8 @@ public class BrowserModel {
      * Returns the first page in next history, null if next history is empty.
      */
     public URL next () {
-        if (hasNext()) {
             myCurrentIndex++;
             return myHistory.get(myCurrentIndex);
-        }
-        return null;
     }
 
     /**
