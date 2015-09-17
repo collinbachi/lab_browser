@@ -62,7 +62,11 @@ public class BrowserView {
     private Button myNextButton;
     private Button myHomeButton;
     // favorites
+    private Button myFavoritesButton;
     private ComboBox<String> myFavorites;
+    private TextInputDialog favoriteDialog=new TextInputDialog();
+    ComboBox favCombo=new ComboBox();
+
     // get strings from resource file
     private ResourceBundle myResources;
     // the data
@@ -210,12 +214,33 @@ public class BrowserView {
         result.getChildren().add(myNextButton);
         myHomeButton = makeButton("HomeCommand", event -> home());
         result.getChildren().add(myHomeButton);
+        
+        
+        Button favoriteButton = new Button();
+        String label = "Add Favorite";
+        favoriteButton.setText(label);
+        favoriteButton.setOnAction(event -> favorite());
+        result.getChildren().add(favoriteButton);
+     
+        result.getChildren().add(favCombo);
+        
+        
         // if user presses button or enter in text field, load/show the URL
         EventHandler<ActionEvent> showHandler = new ShowPage();
         result.getChildren().add(makeButton("GoCommand", showHandler));
         myURLDisplay = makeInputField(40, showHandler);
         result.getChildren().add(myURLDisplay);
         return result;
+    }
+    
+    public void favorite()
+    {
+    	TextInputDialog favLabel = new TextInputDialog();
+    	favLabel.setHeaderText("Make new Favorite");
+    	favLabel.setContentText("Enter label here");
+    	
+    	favCombo.getItems().add(favLabel.showAndWait().get());
+
     }
 
     // make buttons for setting favorites/home URLs
